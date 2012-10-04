@@ -1,6 +1,5 @@
 from django.db.models.signals import post_syncdb
 import models
-#from django.contrib.auth.models import User
 import signals
 
 

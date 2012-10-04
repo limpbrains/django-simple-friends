@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from friends.models import FriendshipRequest, Friendship, UserBlocks
 from friends.templatetags import friends_tags
 
@@ -11,7 +11,7 @@ class BaseTestCase(TestCase):
     def setUp(self):
         for i in range(1, 5):
             setattr(self, 'user%d' % i,
-                                  User.objects.get(username='testuser%d' % i))
+                                  get_user_model().objects.get(username='testuser%d' % i))
 
 
 class BlocksFilterTestCase(BaseTestCase):

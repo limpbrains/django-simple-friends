@@ -19,7 +19,7 @@ from django.db import transaction
 from django.views.generic.base import RedirectView
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from models import FriendshipRequest, Friendship
 from app_settings import REDIRECT_FALLBACK_TO_PROFILE
@@ -46,7 +46,7 @@ class BaseFriendshipActionView(RedirectView):
         if request.user.username == username:
             return HttpResponseBadRequest(ugettext(u'You can\'t befriend ' \
                                                    u'yourself.'))
-        user = get_object_or_404(User, username=username)
+        user = get_object_or_404(get_user_model(), username=username)
         self.action(request, user, *args, **kwargs)
         self.set_url(request, **kwargs)
         return super(BaseFriendshipActionView, self).get(request, **kwargs)
