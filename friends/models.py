@@ -131,10 +131,10 @@ class UserBlocks(models.Model):
 
 # Signal connections
 models.signals.post_save.connect(signals.create_friendship_instance,
-                                 sender=settings.AUTH_USER_MODEL,
+                                 sender=get_user_model(),
                                  dispatch_uid='friends.signals.create_' \
                                               'friendship_instance')
 models.signals.post_save.connect(signals.create_userblocks_instance,
-                                 sender=settings.AUTH_USER_MODEL,
+                                 sender=get_user_model(),
                                  dispatch_uid='friends.signals.create_' \
                                               'userblocks_instance')
