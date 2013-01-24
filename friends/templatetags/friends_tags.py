@@ -1,9 +1,10 @@
 from django import template
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from friends.models import FriendshipRequest, Friendship, UserBlocks
 
 
 register = template.Library()
+User = get_user_model()
 
 
 class AddToFriendsNode(template.Node):
