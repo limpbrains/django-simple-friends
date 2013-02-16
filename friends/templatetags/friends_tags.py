@@ -126,6 +126,12 @@ def is_friends_with(value, arg):
     return Friendship.objects.are_friends(user, target)
 
 
+def is_friendship_requests_with(value, arg):
+    user = _get_user_from_value('isfriendswith', value)
+    target = _get_user_from_argument('isfriendswith', arg)
+    return FriendshipRequest.objects.filter(from_user=target, to_user=user)
+
+
 def _get_user(value):
     if isinstance(value, User):
         return value
@@ -158,5 +164,6 @@ register.filter('friends', friends_)
 register.filter('friendshiprequests', friendship_requests)
 register.filter('isblockedby', is_blocked_by)
 register.filter('isfriendswith', is_friends_with)
+register.filter('isfriendshiprequestswith', is_friendship_requests_with)
 register.tag('addtofriends', add_to_friends)
 register.tag('blockuser', block_user)
